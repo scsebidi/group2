@@ -1,0 +1,18 @@
+<%= simple_form_for(@order) do |f| %>
+  <%= f.error_notification %>
+
+  <div class="form-inputs">
+    <%= f.input :address, :label => "Shipping Address" %>
+     <%= f.select :pay_type, [['Pay On Delivery', 'Pay on Delivery' ], ['MasterCard', 'MasterCard']], :label => "Payment Type" %>
+    <%= f.hidden_field :created_at %>
+    <%= f.hidden_field :updated_at %>
+    
+     <% if current_user.role == "admin" %>
+    <%= f.input :order_status %> *change order status to 1, if shipped
+    <% end %>
+  </div>
+
+  <div class="form-actions">
+    <%= f.button :submit %>
+  </div>
+<% end %>

@@ -1,0 +1,11 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  product_id: 1
+  desc: MyString
+  created_at: 2014-04-13 22:50:21
+
+two:
+  product_id: 1
+  desc: MyString
+  created_at: 2014-04-13 22:50:21

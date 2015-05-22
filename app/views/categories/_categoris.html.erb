@@ -1,0 +1,10 @@
+		<div class="side1">
+			<div class="sidetop">
+			Categories
+			</div>
+			
+			<% @categories.each do |category| %>
+			+<%= link_to category.name, category %> <br />
+			 
+			<% end %>
+		</div>

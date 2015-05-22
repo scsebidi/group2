@@ -1,0 +1,164 @@
+<div class="row">
+  <div class="col-md-2">
+    <div class="side1">
+      
+        <ul class="list-group">
+          <li class="list-group-item list-group-item-success"><%= link_to 'Edit Profile', edit_user_registration_path %></li>
+          <li class="list-group-item list-group-item-info"><%= link_to 'Order History', orders_path %></li>
+          <li class="list-group-item"></li>
+          <li class="list-group-item list-group-item-warning"><b>Categories</b></li>
+        <li class="list-group-item"><%= link_to 'All Categories', categories_path %></li>
+        
+          <%= render @categories %>
+        </ul>
+    </div>
+  </div>
+
+  <div class="col-md-10">
+    <div class="side1">
+      <div class="sidetop">
+      <ol class="breadcrumb">
+        <li><%= link_to 'Home', root_path, :class => 'sid' %></li></li>
+        <li><%= link_to "Orders", orders_path, :class => 'sid' %></li>
+        
+      </ol>
+      </div>
+      <% if !current_user.nil? and current_user.admin? %>
+          <p>
+          <strong>User_ID:</strong>
+          <%= @order.user_id %>
+          </p>
+
+          <p>
+            <strong>Email:</strong>
+            <%= @order.email %>
+          </p>
+
+          <p>
+            <strong>Name:</strong>
+            <%= @order.name %>
+          </p>
+
+          <p>
+            <strong>Shipping Address:</strong>
+            <%= @order.address %>
+          </p>
+          <% end %> 
+          <p>
+            <strong>Pay type:</strong>
+            <%= @order.pay_type %>
+          </p>
+
+          <p>
+            <strong>Created at:</strong>
+            <%= @order.created_at %>
+          </p>
+
+          <p>
+            <strong>Updated at:</strong>
+            <%= @order.updated_at %>
+          </p>
+
+          <p>
+            <strong>Order status:</strong>
+
+           <% if @order.order_status == '0' %> Waiting To Be Shipped <% elsif @order.order_status == '1' %> SHIPPED <% end %>
+          </p>
+          <%= link_to 'Download Order', order_path(format: 'pdf'), :class => 'btn btn-small btn-info' %>  
+          <% if current_user.role == "admin" %>
+            <%= link_to 'Edit Order', edit_order_path(@order), :class => 'btn btn-small btn-danger' %> *to change order statuss
+          <% end %>  
+
+          <h1>Items Ordered</h1>  
+          <table class="table table-bordered">
+            <thead>
+              <tr>
+                <th>Product Name</th>
+                <th>Quantity</th>
+                <th>Amount</th>
+              </tr>
+            </thead>
+
+            <tbody>
+              <% @line_items.each do |line_item| %>
+                <tr>
+                  <td><%= line_item.productname %></td>
+                  <td><%= line_item.quantity %></td>
+                  <td><%= number_to_currency(line_item.total_price) %></td>
+                </tr>
+              <% end %>
+            </tbody>
+          </table>
+    </div>
+  </div>
+  
+</div>
+
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>User:</strong>
+  <%= @order.user_id %>
+</p>
+
+<p>
+  <strong>Email:</strong>
+  <%= @order.email %>
+</p>
+
+<p>
+  <strong>Name:</strong>
+  <%= @order.name %>
+</p>
+
+<p>
+  <strong>Address:</strong>
+  <%= @order.address %>
+</p>
+
+<p>
+  <strong>Pay type:</strong>
+  <%= @order.pay_type %>
+</p>
+
+<p>
+  <strong>Created at:</strong>
+  <%= @order.created_at %>
+</p>
+
+<p>
+  <strong>Updated at:</strong>
+  <%= @order.updated_at %>
+</p>
+
+<p>
+  <strong>Order status:</strong>
+  <%= @order.order_status %>
+</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>Product</th>
+      <th>Cart</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @line_items.each do |line_item| %>
+      <tr>
+        <td><%= line_item.product_id %></td>
+        <td><%= line_item.cart_id %></td>
+        <td><%= line_item.quantity %></td>
+        <td><%= line_item.created_at %></td>
+        <td><%= link_to 'Show', line_item %></td>
+        <td><%= link_to 'Edit', edit_line_item_path(line_item) %></td>
+        <td><%= link_to 'Destroy', line_item, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<%= link_to 'Edit', edit_order_path(@order) %> |
+<%= link_to 'Back', orders_path %>

@@ -1,0 +1,22 @@
+<ul class="nav navbar-nav navbar-right">
+       
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" id="c"> <% if user_signed_in? %> Welcome <%= current_user.name %>, <% else %> Welcome Gruest <% end %>Cart (<%= cart.quantity %>) items<b class="caret"></b> *click to view cart</a>
+          <ul class="dropdown-menu" id="cd">
+            <div id="cart" >
+				       <p id="notice"><%= notice %></p>
+				<div class="cart_title" >Your Cart: <%= cart.quantity %> Items</div>
+				<table>
+				<%= render(cart.line_items) %>
+				<tr class="total_line" >
+				<td colspan="2" >Total</td>
+				<td class="total_cell" ><%= number_to_currency(cart.total_price) %></td>
+				</tr>
+				</table>
+				<%= button_to "Checkout" , new_order_path, :method => :get %>
+				<%= button_to 'Empty cart' , cart, :method => :delete, :confirm => 'Are you sure?' %>
+            </div>
+          </ul>
+        </li>
+      </ul>
+

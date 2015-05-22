@@ -1,0 +1,12 @@
+<%= simple_form_for(@shipper) do |f| %>
+  <%= f.error_notification %>
+
+  <div class="form-inputs">
+    <%= f.input :shipper_name %>
+    <%= f.input :contact_number %>
+  </div>
+
+  <div class="form-actions">
+    <%= f.button :submit %>
+  </div>
+<% end %>

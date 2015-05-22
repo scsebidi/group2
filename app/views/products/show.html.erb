@@ -1,0 +1,201 @@
+<div class="row">
+		<div class="col-md-2">
+		<div class="side1">
+			
+				<ul class="list-group">
+				  <li class="list-group-item list-group-item-success"><%= link_to 'Edit Profile', edit_user_registration_path %></li>
+				  <li class="list-group-item list-group-item-info"><%= link_to 'Order History', orders_path %></li>
+				  <li class="list-group-item"></li>
+				  <li class="list-group-item list-group-item-warning"><b>Categories</b></li>
+				<li class="list-group-item"><%= link_to 'All Categories', categories_path %></li>
+				
+					<%= render @categories %>
+				</ul>
+		</div>
+	</div>
+	<div class="col-md-10">
+		<div class="side1">
+			<div class="sidetop">
+			<ol class="breadcrumb">
+			  <li><%= link_to 'Home', root_path, :class => 'sid' %></li></li>
+			  <li><%= link_to "Product", products_path, :class => 'sid' %></li>
+			  <li class="active"><%= @product.name %></li>
+			</ol>
+			</div>
+			<div class="">
+				<div class="col-md-5">
+					
+					<ol class="product_image">
+						<%= render @product_image %>
+					</ol>
+					
+					<br />
+					
+					<div class="clear"></div>
+					<h1><%= "#{@product.impressionist_count} Views" %></h1>
+					<%= button_to 'Add to Cart' , line_items_path(:product_id => @product.id), :remote => true %>
+					<a href="mailto:dd@dd.com" class="btn btn-danger btn-sm">Send To Friend</a>
+					<% if !current_user.nil? and current_user.admin? %>
+					<%= link_to 'Edit', edit_product_path(@product), :class => 'btn btn-primary btn-sm' %>|<%= link_to 'Back', products_path, :class => 'btn btn-primary btn-sm' %>
+					<% end %>
+				</div>
+				<div class="col-md-7">
+					<p>
+					  <strong>Name:</strong>
+					  <%= @product.name %>
+					</p>
+
+					<p>
+					  <strong>Description:</strong>
+					  <%= @product.description %>
+					</p>
+
+					<p>
+					  <strong>Unit price:</strong>
+					  <%= @product.unit_price %>
+					</p>
+
+					<p>
+					  <strong>Quantity:</strong>
+					  <%= @product.quantity %>
+					</p>
+
+					<p>
+					  <strong>Manufacturer:</strong>
+					  <%= @product.manufacturer_id %>
+					</p>
+
+					<p>
+					  <strong>Category:</strong>
+					  <%= @product.category_id %>
+					</p>
+
+					<p>
+					  <strong>Created at:</strong>
+					  <%= @product.created_at %>
+					</p>
+
+					<p>
+					  <strong>Updated at:</strong>
+					  <%= @product.updated_at %>
+					</p>
+
+						
+
+
+				</div>
+			</div>
+		</div>
+		<div class="clear"></div>
+		<h2>Reviews</h2>
+			<div class="panel panel-danger">
+			  <!-- Default panel contents -->
+			  <div class="panel-heading">Reviews for <%= @product.name %></div>
+			  <div class="panel-body">
+			  <% if user_signed_in? %>
+			    <%= simple_form_for(@review) do |f| %>
+						  <%= f.error_notification %>
+
+						  <div class="form-inputs">
+						    
+						    <%= f.input :review %>
+						    <%=f.hidden_field :product_id, :value => @product.id %>
+						  </div>
+
+						  <div class="form-actions">
+						    <%= f.button :submit %>
+						  </div>
+						<% end %>
+						<% end %>
+			  </div>
+
+			  <!-- List group -->
+			  <ul class="list-group">
+			  <% @reviews.each do |review| %>
+			    <li class="list-group-item">
+			    <h3><%= review.username %></h3>
+			    <p><%= review.review %></p>
+			    </li>
+			  <% end %>  	
+			</div>
+		
+	</div>
+	
+</div>
+
+
+<p id="notice"><%= notice %></p>
+
+
+<!--
+<h3>Pictures (<%= @product.product_image.count %>)</h3>
+<ol class="product_image">
+	<%= render @product_image %>
+</ol>
+
+
+<p>
+  <strong>Name:</strong>
+  <%= @product.name %>
+</p>
+
+<p>
+  <strong>Description:</strong>
+  <%= @product.description %>
+</p>
+
+<p>
+  <strong>Unit price:</strong>
+  <%= @product.unit_price %>
+</p>
+
+<p>
+  <strong>Quantity:</strong>
+  <%= @product.quantity %>
+</p>
+
+<p>
+  <strong>Manufacturer:</strong>
+  <%= @product.manufacturer_id %>
+</p>
+
+<p>
+  <strong>Category:</strong>
+  <%= @product.category_id %>
+</p>
+
+<p>
+  <strong>Created at:</strong>
+  <%= @product.created_at %>
+</p>
+
+<p>
+  <strong>Updated at:</strong>
+  <%= @product.updated_at %>
+</p>
+
+<p>
+  <strong>Views:</strong>
+  <%= @product.views %>
+</p>
+
+<p>
+  <strong>Available size:</strong>
+  <%= @product.available_size %>
+</p>
+
+<p>
+  <strong>Available color:</strong>
+  <%= @product.available_color %>
+</p>
+
+<p>
+  <strong>Quantity sold:</strong>
+  <%= @product.quantity_sold %>
+</p>
+
+
+
+<%= link_to 'Edit', edit_product_path(@product) %> |
+<%= link_to 'Back', products_path %>
+-->

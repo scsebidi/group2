@@ -1,0 +1,14 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Shipper name:</strong>
+  <%= @shipper.shipper_name %>
+</p>
+
+<p>
+  <strong>Contact number:</strong>
+  <%= @shipper.contact_number %>
+</p>
+
+<%= link_to 'Edit', edit_shipper_path(@shipper) %> |
+<%= link_to 'Back', shippers_path %>

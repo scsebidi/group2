@@ -1,0 +1,21 @@
+<%= simple_form_for(@product, html: { multipart: true }) do |f| %>
+
+  <%= f.error_notification %>
+
+  <div class="form-inputs">
+    <%= f.input :name %>
+    <%= f.input :description %>
+    <%= f.input :unit_price %>
+    <%= f.collection_select(:manufacturer_id,Manufacturer.all,:id,:name, {prompt: 'Select Manufacturer'}) %>
+    <%= f.collection_select(:category_id,Category.all,:id,:name, {prompt: 'Select Category'}) %>
+    <%= f.input :created_at %>
+    <%= f.input :updated_at %>
+    <%= f.input :available_size, :label => "Enter Default Picture Name"  %>
+    <!--<%= f.input :available_color %>
+    <%= f.input :photo %>-->
+  </div>
+
+  <div class="form-actions">
+    <%= f.button :submit %>
+  </div>
+<% end %>

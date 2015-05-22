@@ -1,0 +1,110 @@
+<div class="row">
+	<div class="col-md-2">
+		<div class="side1">
+			
+				<ul class="list-group">
+				  <li class="list-group-item list-group-item-success"><%= link_to 'Edit Profile', edit_user_registration_path %></li>
+				  <li class="list-group-item list-group-item-info"><%= link_to 'Order History', orders_path %></li>
+				  <li class="list-group-item"></li>
+				  <li class="list-group-item list-group-item-warning"><b>Categories</b></li>
+				<li class="list-group-item"><%= link_to 'All Categories', categories_path %></li>
+				
+					<%= render @categories %>
+				</ul>
+		</div>
+	</div>
+	<div class="col-md-10">
+		<div class="side1">
+			<div class="sidetop">
+			<ol class="breadcrumb">
+			  <li><%= link_to 'Home', root_path, :class => 'sid' %></li></li>
+			  <li><%= link_to "Product", products_path, :class => 'sid' %></li>
+			  
+			</ol>
+						Sort By: <%= sortable "name" %> | 
+			<%= sortable "unit_price" %>
+			<% if user_signed_in? %>
+			 <% if current_user.role == "admin" %>
+			<%= link_to 'New Product', new_product_path, :class => 'btn btn-sm btn-info' %>
+			<% end %>
+			<% end %>
+			</div>
+		
+
+			<div class="row">
+				<% @products.each do |product| %>
+			  <div class="col-md-4">
+				<div class="prod">
+					<div class="prod_img">
+						<%= image_tag @product_images.first.picture.url %>
+						
+					</div>
+					<div class="prod_txt"><%= product.name %><br />
+					<b><%= number_to_currency(product.unit_price) %></b><br />
+					<%= link_to('View Product', product, :class => 'btn btn-primary btn-sm')  %>
+					<%= button_to 'Add to Cart' , line_items_path(:product_id => product), :remote => true %>
+					<% if !current_user.nil? and current_user.admin? %>
+					<%= link_to 'Edit', edit_product_path(product), :class => 'btn btn-info btn-sm' %>
+					<%= link_to 'Destroy', product, method: :delete, data: { confirm: 'Are you sure?' }, :class => 'btn btn-danger btn-sm' %>
+					<% end %>
+					</div>
+				</div>
+			   </div>
+			   <% end %>
+			</div>
+		</div>
+	</div>
+	
+</div>
+	<!--
+<h1>Listing products</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Description</th>
+      <th>Unit price</th>
+      <th>Quantity</th>
+      <th>Manufacturer</th>
+      <th>Category</th>
+      <th>Created at</th>
+      <th>Updated at</th>
+      <th>Views</th>
+      <th>Available size</th>
+      <th>Available color</th>
+      <th>Quantity sold</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @products.each do |product| %>
+      <tr>
+        <td><%= product.name %></td>
+        <td><%= product.description %></td>
+        <td><%= product.unit_price %></td>
+        <td><%= product.quantity %></td>
+        <td><%= product.manufacturer_id %></td>
+        <td><%= product.category_id %></td>
+        <td><%= product.created_at %></td>
+        <td><%= product.updated_at %></td>
+        <td><%= product.views %></td>
+        <td><%= product.available_size %></td>
+        <td><%= product.available_color %></td>
+        <td><%= product.quantity_sold %></td>
+        <td><%= link_to 'Show', product %></td>
+        <td><%= link_to 'Edit', edit_product_path(product) %></td>
+        <td><%= link_to 'Destroy', product, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+-->
+ <% if user_signed_in? %>
+<% if current_user.role == "admin" %>
+<%= link_to 'New Product', new_product_path, :class => 'btn btn-sm btn-info' %>
+<% end %>
+<% end %>

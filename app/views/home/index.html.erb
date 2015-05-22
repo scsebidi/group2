@@ -1,0 +1,81 @@
+
+<br />
+<br />
+
+<div id="slider">
+<img src="img/22.png" alt="Logo" />
+<br />
+<button type="button" class="btn btn-danger btn-sm">View Collection</button>
+<br />
+<br />
+<img src="img/24.png" alt="Logo" />
+</div>
+
+<div class="row">
+	<div class="col-md-4 s11">
+	
+	</div>	
+	<div class="col-md-4 s12">
+	
+	</div>	
+	<div class="col-md-4 s13">
+	
+	</div>	
+</div>	
+<!--
+<% if !current_user.nil? and current_user.admin? %>
+  <% @users.each do |user| %>
+    <p>User: <%=link_to user.email, user %> Role: <%= user.role unless user.role.nil? %></p>
+  <% end %>
+<% end %>
+-->
+
+<div class="best"><img src="img/33.png" alt="rss feed" /></div>
+<div>
+
+<div class="row">
+	<% @products.each do |product| %>
+  <div class="col-md-4">
+	<div class="prod">
+		<div class="prod_img"><%= image_tag product.available_size %></div>
+		<div class="prod_txt"><%= product.name %>
+					<b><%= number_to_currency(product.unit_price) %></b><br />
+		<%= link_to('View Product', product, :class => 'btn btn-primary btn-sm')  %>
+		<%= button_to 'Add to Cart' , line_items_path(:product_id => product), :remote => true %>
+		</div>
+	</div>
+   </div>
+   <% end %>
+</div>
+
+
+</div>
+<!--
+<h1>products AVailable</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Description</th>
+      <th>Unit price</th>
+      <th>Quantity</th>
+      <th>Manufacturer</th>
+	   <th></th>
+      </tr>
+  </thead>
+
+  <tbody>
+    <% @products.each do |product| %>
+      <tr>
+        <td><%= product.name %></td>
+        <td><%= product.description %></td>
+        <td><%= product.unit_price %></td>
+        <td><%= product.quantity %></td>
+        <td><%= product.manufacturer_id %></td>
+        <td><%= link_to 'Show', product %></td>
+        </tr>
+    <% end %>
+  </tbody>
+</table>
+-->

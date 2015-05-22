@@ -1,0 +1,54 @@
+<%# navigation styled for Bootstrap 3.0 %>
+<nav class="navbar navbar-inverse navbar-fixed-top">
+	<div class="row pp">
+	<div class="container">
+		<div>
+<div class="row">
+<div class="col-md-3">
+        <img src="img/original.png" alt="Logo" />
+</div>  
+<div class="col-md-5">
+				<a href="http://www.topsmarkets.com"><img src="img/1a.jpg" alt="ad" /></a>
+</div>  
+<div class="col-md-4">      
+<%= form_tag(products_path, :method => "get", id: "search-form") do %>
+  <%= text_field_tag :search, params[:search], placeholder: "Search products" %>
+  <%= submit_tag "Search", :name => nil %>
+<% end %>
+
+<%= render @cart if (params[:controller] == 'products') %>
+<%= render @cart if (params[:controller] == 'home') %>
+<%= render @cart if (params[:controller] == 'categories') %>
+<%= render @cart if (params[:controller] == 'application') %>
+<%= render @cart if (params[:controller] == 'carts') %>
+<%= render @cart if (params[:controller] == 'line_items') %>
+<%= render @cart if (params[:controller] == 'orders') %>
+<%= render @cart if (params[:controller] == 'product_images') %>
+<%= render @cart if (params[:controller] == 'shippers') %>
+<%= render @cart if (params[:controller] == 'static_pages') %>
+<%= render @cart if (params[:controller] == 'suppliers') %>
+</div>
+<div class="clear"></div>
+</div>
+		</div>
+		</div>
+	</div>
+  <div class="container">
+	
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      
+    </div>
+
+    <div class="collapse navbar-collapse">
+      <ul class="nav navbar-nav">
+        <%= render 'layouts/navigation_links' %>
+      </ul>
+    </div>
+  </div>
+</nav>
